@@ -32,21 +32,21 @@ print(list1, end="\n \n \n")
 
 # 练习题：0. 给定一个整数列表 nums 和一个目标值 target，请在该数组中找出和为目标值的两个元素，并将它们的数组下标值打印出来。
 # 1. 输入一个整数列表，输入STOP结束
-# nums = []
-# while True:
-#     temp = input("请输入一个整数（输入STOP结束）：")
-#     if temp == "STOP":
-#         break
-#     nums.append(int(temp))
-# target = int(input("请输入目标整数："))
+nums = []
+while True:
+    temp = input("请输入一个整数（输入STOP结束）：")
+    if temp == "STOP":
+        break
+    nums.append(int(temp))
+target = int(input("请输入目标整数："))
 
-# # 获取 nums 的长度，并将结果存放到 n 变量中 #
-# n = len(nums)
-# for i in range(n):
-#     for j in range(i + 1, n):
-#         if nums[i] + nums[j] == target:
-#             # 将找到的两个元素下标值以列表的形式打印出来 #
-#             print([i, j])
+# 获取 nums 的长度，并将结果存放到 n 变量中 #
+n = len(nums)
+for i in range(n):
+    for j in range(i + 1, n):
+        if nums[i] + nums[j] == target:
+            # 将找到的两个元素下标值以列表的形式打印出来 #
+            print([i, j])
 
 # 2. 最后，回忆前面我们学习过的 random 模块，生成一个由 10000 个整数（范围是 1 ~ 65535）构成的随机列表，目标值 target 由用户输入。
 import random
