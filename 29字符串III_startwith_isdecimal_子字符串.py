@@ -92,18 +92,18 @@ print("一二三木头人".isidentifier()) # True
 # 动动手0：给定一个字符串 text 和字符串列表 words，返回 words 中每个单词在 text 中的位置（要求最终的位置从小到大进行排序）。
 # 举例：text："I love FishC and FishC love me"； words："FishC"； 输出：[[7, 11], [17, 21]]
 
-# text = input("请输入text的内容：")
-# words = input("请输入words的内容：")
-# words = words.split() # 将words按空格分割成列表
+text = input("请输入text的内容：")
+words = input("请输入words的内容：")
+words = words.split() # 将words按空格分割成列表
 
-# result = []
-# for each in words:
-#     temp = text.find(each)
-#     while temp != -1:
-#         result.append([temp,temp+len(each)-1])
-#         temp = text.find(each, temp+1) # 从temp+1位置开始查找
+result = []
+for each in words:
+    temp = text.find(each)
+    while temp != -1:
+        result.append([temp,temp+len(each)-1])
+        temp = text.find(each, temp+1) # 从temp+1位置开始查找
     
-# print(sorted(result))
+print(sorted(result))
 
 # 动动手1：编写一个程序，判断输入的字符串是否由多个子字符串重复多次构成。
 # 举例：输入："FCFC"，输出：True；输入："FishCFishc"，输出：False

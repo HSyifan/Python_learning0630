@@ -51,30 +51,30 @@ print("I love FishC.com".translate(str.maketrans("love", "1234", "love")))
 # 动动手0：用户输入两个版本号 v1 和 v2，请编写代码比较它们，找出较新的版本。
 # 版本号是由一个或多个修订号组成，各个修订号之间由点号（.）连接，每个修订号由多位数字组成，例如 1.2.33 和 0.0.11 都是有效的版本号。
 # 从左到右的顺序依次比较它们的修订号，点号（.）左侧的值要比右侧的权重大，即 0.1 要比 0.0.99 大。
-# dds0_v1 = input("请输入第一个版本号，v1 =")
-# dds0_v2 = input("请输入第二个版本号，v2 =")
+dds0_v1 = input("请输入第一个版本号，v1 =")
+dds0_v2 = input("请输入第二个版本号，v2 =")
 
-# # 按点号拆成修订号列表，再转成整数，例如 "1.2.33" → [1, 2, 33]
-# dds0_list1 = [int(x) for x in dds0_v1.split(".")]
-# dds0_list2 = [int(x) for x in dds0_v2.split(".")]
+# 按点号拆成修订号列表，再转成整数，例如 "1.2.33" → [1, 2, 33]
+dds0_list1 = [int(x) for x in dds0_v1.split(".")]
+dds0_list2 = [int(x) for x in dds0_v2.split(".")]
 
-# # 补齐较短的一侧（缺的修订号当作 0），方便对齐比较
-# # 例如 "0.1" → [0, 1, 0]，"0.0.99" → [0, 0, 99]
-# dds0_len = max(len(dds0_list1), len(dds0_list2))
-# dds0_list1 += [0] * (dds0_len - len(dds0_list1))
-# dds0_list2 += [0] * (dds0_len - len(dds0_list2))
+# 补齐较短的一侧（缺的修订号当作 0），方便对齐比较
+# 例如 "0.1" → [0, 1, 0]，"0.0.99" → [0, 0, 99]
+dds0_len = max(len(dds0_list1), len(dds0_list2))
+dds0_list1 += [0] * (dds0_len - len(dds0_list1))
+dds0_list2 += [0] * (dds0_len - len(dds0_list2))
 
-# # 从左到右逐段比较
-# for i in range(dds0_len):
-#     if dds0_list1[i] > dds0_list2[i]:
-#         print(f"v1")
-#         break
-#     elif dds0_list1[i] < dds0_list2[i]:
-#         print(f"v2")
-#         break
-# else:
-#     # for 正常结束（没有 break）说明两版本相等
-#     print("两个版本号相同")
+# 从左到右逐段比较
+for i in range(dds0_len):
+    if dds0_list1[i] > dds0_list2[i]:
+        print(f"v1")
+        break
+    elif dds0_list1[i] < dds0_list2[i]:
+        print(f"v2")
+        break
+else:
+    # for 正常结束（没有 break）说明两版本相等
+    print("两个版本号相同")
 
 
 # 动动手1：编写一个加密程序，其实现原理是通过替换指定的字符进行加密，附加要求是实现密文逆向检测。
