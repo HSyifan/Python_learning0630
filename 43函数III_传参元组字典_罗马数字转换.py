@@ -132,36 +132,48 @@ func((1, 2), *(3, 4))
 # 请输入一个罗马字符：MMXCIX
 # 转换后的结果是：2099
 
-# roman_dict = {
-#     "I": 1,
-#     "V": 5,
-#     "X": 10,
-#     "L": 50,
-#     "C": 100,
-#     "D": 500,
-#     "M": 1000
-# }
+roman_dict = {
+    "I": 1,
+    "V": 5,
+    "X": 10,
+    "L": 50,
+    "C": 100,
+    "D": 500,
+    "M": 1000
+}
 
-# def roman_to_int(s):
-#     total = 0
-#     for i in range(len(s)):
-#         curr = roman_dict[s[i]]
-#         if i != len(s) - 1: # 如果 i 不是最后一个下标：
-#             next = roman_dict[s[i + 1]] # 取出下一个值 next = roman_dict[s[i + 1]]
-#             if curr < next: # curr < next  →  total 减去 curr
-#                 total -= curr
-#             else: # 否则         →  total 加上 curr
-#                 total += curr
-#         else: # 如果 i 是最后一个下标：
-#             total += curr # total 加上 curr
-#     return total
+def roman_to_int(s):
+    total = 0
+    for i in range(len(s)):
+        curr = roman_dict[s[i]]
+        if i != len(s) - 1: # 如果 i 不是最后一个下标：
+            next = roman_dict[s[i + 1]] # 取出下一个值 next = roman_dict[s[i + 1]]
+            if curr < next: # curr < next  →  total 减去 curr
+                total -= curr
+            else: # 否则         →  total 加上 curr
+                total += curr
+        else: # 如果 i 是最后一个下标：
+            total += curr # total 加上 curr
+    return total
 
-# dds0_input = input("请输入一个罗马字符：")
-# roman_result = roman_to_int(dds0_input)
-# print(f"转换后的结果是：{roman_result}")
+dds0_input = input("请输入一个罗马字符：")
+roman_result = roman_to_int(dds0_input)
+print(f"转换后的结果是：{roman_result}")
 
 
 # 动动手1：编写一个函数，将指定的数字转换为罗马字符的形式。
+
+#################################
+# 请输入一个整数：3
+# 转换后的结果是：III
+# 请输入一个整数：99
+# 转换后的结果是：XCIX
+# 请输入一个整数：2022
+# 转换后的结果是：MMXXII
+# 请输入一个整数：2099
+# 转换后的结果是：MMXCIX
+# 请输入一个整数：10086
+# 转换后的结果是：MMMMMMMMMMLXXXVI
 
 roman_dict_reverse = {
     1: "I",
@@ -183,24 +195,16 @@ def int_to_roman(n):
     result = ""
     # 面额必须从大到小：1000, 900, 500, 400, ... 1
     for key in sorted(roman_dict_reverse, reverse=True):
+        # （能减几次就拼几次，所以这里用 while，不是 if）
         while n >= key: # 当 n 还大于等于当前面额 key 时：
-            result += roman_dict_reverse[key] #     result 拼上 roman_dict_reverse[value]
-            n -= key #     n 减去 key
-            # （能减几次就拼几次，所以这里用 while，不是 if）
-            # break
+            result += roman_dict_reverse[key] # result 拼上 roman_dict_reverse[value]
+            n -= key # n 减去 key
     return result
+    
 dds1_input = int(input("请输入一个整数："))
 int_result = int_to_roman(dds1_input)
 print(f"转换后的结果是：{int_result}")
 
-# 请输入一个整数：3
-# 转换后的结果是：III
-# 请输入一个整数：99
-# 转换后的结果是：XCIX
-# 请输入一个整数：2022
-# 转换后的结果是：MMXXII
-# 请输入一个整数：2099
-# 转换后的结果是：MMXCIX
 
 
 
