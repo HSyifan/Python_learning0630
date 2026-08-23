@@ -59,7 +59,7 @@ for x in range(10):
         for y in range(10):
             if y % 3 == 0:
                 _.append([x, y])
-print(_)
+print(_) # [[0, 0], [0, 3], [0, 6], [2, 0], [2, 3], [2, 6], [4, 0], [4, 3], [4, 6], [6, 0], [6, 3], [6, 6], [8, 0], [8, 3], [8, 6]]
 
 """KISS原则：Keep It Simple Stupid"""
 
