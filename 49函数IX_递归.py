@@ -97,19 +97,21 @@ print(sumtree([1, 2, 3, [4, 5, [6, 7, 8, [9, 10]]]])) # 55
 # # print(fibRecur(120)) # 反应很久很久
 
 # 优化：
-def fibRecur_opt(n, cache=None):
-    if cache is None:
-        cache = {}
-    if n in cache:
-        return cache[n]
-    if n == 1 or n == 2:
-        return 1
-    cache[n] = fibRecur_opt(n - 1, cache) + fibRecur_opt(n - 2, cache)
-    return cache[n]
+# def fibRecur_opt(n, cache=None):
+#     if cache is None:
+#         cache = {}
+#     if n in cache:
+#         return cache[n]
+#     if n == 1 or n == 2:
+#         return 1
+#     cache[n] = fibRecur_opt(n - 1, cache) + fibRecur_opt(n - 2, cache)
+#     return cache[n]
 
-print(fibRecur_opt(120)) # 5358359254990966640871840
+# print(fibRecur_opt(120)) # 5358359254990966640871840
 
 # 答案：
+# 这里优化的技巧就是尽可能地将更多的操作放到参数中去实现
+# Guido van Rossum 认为递归并不是 Python 的核心特性，如果需要大量递归，那么可能应该选择其他语言，或者改写代码使用循环结构更合适。
 def tailFibRecur(n, x, y):
     if n == 1 or n == 2:
         return y
@@ -131,9 +133,7 @@ print(f"普通递归消耗: {round(t1, 6)}秒。")
 print(f"优化递归消耗: {round(t2, 6)}秒。")
 print(f"普通迭代消耗: {round(t3, 6)}秒。")
 
-# 普通递归消耗: 0.004898秒。
-# 优化递归消耗: 0.017247秒。
-# 普通迭代消耗: 0.13916秒。
+
 
 
 
