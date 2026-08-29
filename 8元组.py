@@ -49,7 +49,7 @@ for i in w:
 
 # 列表推导式(不存在元组推导式)
 s = (1, 2, 3, 4, 5)
-print([each * 2 for each in s])
+print([each * 2 for each in s]) # [2, 4, 6, 8, 10]
 print((each * 2 for each in s)) # 生成器 <generator object <genexpr> at 0x0000027B3C1335E0>
 
 # 元组只有一个元素时，要加逗号

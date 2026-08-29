@@ -51,9 +51,9 @@ print(times.__annotations__) # {'s': dict[str, int], 'n': <class 'int'>, 'return
 
 
 # 练习题：
-def times(s:str, n:int) -> str:
-    return s * n
-print(times(5, "FishC")) # FishCFishCFishCFishCFishC
+# def times(s:str, n:int) -> str:
+#     return s * n
+# print(times(5, "FishC")) # FishCFishCFishCFishCFishC
 # 请问这里会打印什么内容？
 
 def foo(a: 'x', b: 5 + 6, c: list) -> max(2, 9):
