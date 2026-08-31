@@ -91,10 +91,10 @@ p = Path('.')
 p.glob("*txt")
 # print(list(p.glob("*txt"))) # [WindowsPath('NewFishC.txt'), WindowsPath('课后作业+FishC.txt'), WindowsPath('课后作业+FishD.txt')]
 
-# 查找当前目录下的下一级目录中的某类文件
+# 查找当前目录下的下一级目录中的py文件
 # print(list(p.glob("*/*.py")))
 
-# 查找当前目录下的所有子目录
+# 查找当前目录下的所有子目录中的py文件
 # print(list(p.glob("**/*.py")))
 
 

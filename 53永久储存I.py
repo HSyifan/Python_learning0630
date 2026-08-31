@@ -14,7 +14,7 @@ print(f.writable()) # True
 for each in f:
     print(each)
 
-print(f.read())
+print(f.read()) 
 
 # # 获取当前文件指针的位置
 # print(f.tell()) # 44
