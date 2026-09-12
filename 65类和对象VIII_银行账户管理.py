@@ -120,16 +120,10 @@ class Account(PasswdMixin):
         return self.balance
 
     def deposit(self, amount):
-        if amount < 0:
-            print("金额不能为负数")
-            return False
         self.balance += amount
         return True
 
     def withdraw(self, amount):
-        if amount < 0:
-            print("金额不能为负数")
-            return False
         if amount > self.balance:
             print("余额不足")
             return False
@@ -137,15 +131,9 @@ class Account(PasswdMixin):
         return True
 
     def transfer(self, target_account, amount):
-        if amount < 0:
-            print("金额不能为负数")
+        if not self.withdraw(amount):
             return False
-        if amount > self.balance:
-            print("余额不足")
-            return False
-        self.balance -= amount
-        target_account.deposit(amount)
-        return True
+        return target_account.deposit(amount)
 
 
 class UserManager(PasswdMixin):
@@ -158,7 +146,7 @@ class UserManager(PasswdMixin):
         while True:
             raw = input(prompt)
             if raw.isdigit() and int(raw) > 0:
-                return int(raw)
+                return int(raw) # 输对了就是return，跳出循环
             print("卡号必须是正整数，请重新输入。")
 
     def _input_amount(self, prompt="请输入金额："):
@@ -229,16 +217,10 @@ class UserManager(PasswdMixin):
     def do_withdraw(self):
         acc = self.check_account()
         amount = self._input_amount("请输入取款金额：")
-        if acc.withdraw(amount):
-            print(f"取款成功，当前余额：{acc.get_balance()}")
-        else:
-            # 余额不足时允许重新输入金额
-            while True:
-                amount = self._input_amount("请重新输入取款金额：")
-                if acc.withdraw(amount):
-                    print(f"取款成功，当前余额：{acc.get_balance()}")
-                    break
-
+        while not acc.withdraw(amount):
+            amount = self._input_amount("请重新输入取款金额：")
+        print(f"取款成功，当前余额：{acc.get_balance()}")
+        
     def do_transfer(self):
         acc = self.check_account()
         target_card = self._input_card("请输入对方卡号：")
@@ -250,14 +232,9 @@ class UserManager(PasswdMixin):
                 target_card = self._input_card("对方卡号不存在，请重新输入：")
         target = self.accounts[target_card]
         amount = self._input_amount("请输入转账金额：")
-        if acc.transfer(target, amount):
-            print(f"转账成功。您的余额：{acc.get_balance()}，对方余额：{target.get_balance()}")
-        else:
-            while True:
-                amount = self._input_amount("请重新输入转账金额：")
-                if acc.transfer(target, amount):
-                    print(f"转账成功。您的余额：{acc.get_balance()}，对方余额：{target.get_balance()}")
-                    break
+        while not acc.transfer(target, amount):
+            amount = self._input_amount("请重新输入转账金额：")
+        print(f"转账成功。您的余额：{acc.get_balance()}，对方余额：{target.get_balance()}")
 
     def welcome(self):
         print("欢迎使用银行账户管理系统")
@@ -287,7 +264,6 @@ class UserManager(PasswdMixin):
 def main():
     um = UserManager()
     um.welcome()
-
 
 main()
 
