@@ -21,6 +21,9 @@ print(d) # {'F': 70, 'i': 105, 's': 115, 'h': 104, 'C': 67}
 print(d['C']) # 67
 # print(d['c']) # 报错
 
+# 字典自带 .get(key, 默认值) 这个方法
+# self.click_dict[short_url] = self.click_dict.get(short_url, 0) + 1
+# 键存在就返回原来的次数，不存在就返回第二个参数 0
 # get(), 如果key不存在，可返回自定义文本
 print(d.get('c', "这里没有c")) # 这里没有c
 
