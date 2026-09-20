@@ -1,7 +1,18 @@
-"""传入参数的个数"""
-print("小甲鱼")
-print("小甲鱼", "爱", "编程")
+"""传入参数的个数：*args 和 **kwargs"""
+# 这节课核心：函数参数个数不固定时，怎么把多出来的参数「收」进来
+#
+# *args   → 收「位置参数」（按顺序传的），打包成 元组 tuple
+#           例：myfunc(1, 2, 3)  →  args == (1, 2, 3)
+# **kwargs → 收「关键字参数」（带名字传的），打包成 字典 dict
+#           例：myfunc(a=1, b=2) → kwargs == {'a': 1, 'b': 2}
+#
+# 名字可以随便起（*nums、**options 都行），习惯写成 args / kwargs
+# 顺序固定：普通参数 → *args → **kwargs（不能乱排）
 
+print("小甲鱼")
+print("小甲鱼", "爱", "编程")  # print 本身就能收不定个数的参数
+
+# ========== 1. *args：把多出来的位置参数收进一个元组 ==========
 def myfunc(*args):
     print("有{}个参数。".format(len(args)))
     print("第2个参数是：{}".format(args[1]))
@@ -11,12 +22,12 @@ myfunc("小甲鱼", "不二如是")
 myfunc(1, 2, 3, 4, 5)
 
 def myfunc(*args):
-    print(args)
+    print(args)  # 直接打印整个元组
 
 myfunc(1, 2, 3, 4, 5)
 
-"""函数结果打包元组"""
-# 利用元组进行打包，也可以解包元组
+"""函数返回值也能打包成元组（和 *args 是两件事，别混）"""
+# return 多个值时，Python 自动打成元组；外面可以用多个变量接住（解包）
 def myfunc():
     return 1, 2, 3
 
@@ -26,52 +37,52 @@ print(x, y, z)
 def myfunc(*args):
     print(type(args))
 
-myfunc(1, 2, 3, 4, 5) # <class 'tuple'>
+myfunc(1, 2, 3, 4, 5) # <class 'tuple'>  ← 确认：*args 收到的就是元组
 
-# 函数结果打包元组：*args 后必须用关键字传参
-# 不然所有参数都会被*args搜集，导致a和b无法被正确赋值
+# *args 写在前面时：后面的 a、b 必须用关键字传（a=...）
+# 不然位置参数全被 *args 抢走，a、b 拿不到值
 def myfunc(*args, a, b):
     print(args, a, b)
 
-# myfunc(1, 2, 3, 4, 5) # 报错
+# myfunc(1, 2, 3, 4, 5) # 报错：a、b 没赋值
 
-# *args放在前面，a和b必须用关键字传参
 myfunc(1, 2, 3, a=4, b=5) # (1, 2, 3) 4 5
 
-# 将args放在最后是可以的。a和b可以用位置传参
+# *args 写在后面：前面的 a、b 可以正常用位置传参
 def myfunc(a, b, *args):
     print(a, b, args)
 
-myfunc(1, 2, 3, 4, 5) # 1 2 (3, 4, 5)
+myfunc(1, 2, 3, 4, 5) # 1 2 (3, 4, 5)  ← 1、2 给 a、b；剩下进 args
 
-"""函数结果打包为字典"""
+# ========== 2. **kwargs：把多出来的关键字参数收进一个字典 ==========
 def myfunc(**kwargs):
     print(kwargs)
 
-# 打包为字典，必须用关键字传参，因为是键值对
-myfunc(a=1, b=2, c=3)
+# 必须用 名字=值 的形式传，因为字典要有「键」
+myfunc(a=1, b=2, c=3)  # {'a': 1, 'b': 2, 'c': 3}
 
+# 三者一起用：位置参数 → *收进元组 → **收进字典
 def myfunc(a, *b, **c):
     print(a, b, c)
 
 myfunc(1, 2, 3, 4, x=5, y=6) # 1 (2, 3, 4) {'x': 5, 'y': 6}
 
-# 也有同时使用一个星号和两个星号搜集参数的情况
-# print(help(str.format)) # S.format(*args, **kwargs) -> str
+# 内置函数也常这么写，比如 str.format(*args, **kwargs)
+# print(help(str.format))
 
-"""解包参数"""
+# ========== 3. 反过来：调用时用 * / ** 把容器「拆开」传进去（解包）==========
+# 定义时 *args/**kwargs = 打包（收）
+# 调用时 *元组/**字典   = 解包（拆）
 args = (1, 2, 3, 4)
 def myfunc(a, b, c, d):
     print(a, b, c, d)
 
-# myfunc(args) # 报错，只传了一个
+# myfunc(args) # 报错：只传了 1 个参数（整个元组），不是 4 个
 
-# "*" 可以解包元组，传给函数作参数
-myfunc(*args) # 1 2 3 4
+myfunc(*args) # 等价于 myfunc(1, 2, 3, 4)
 
-# "**" 可以解包字典，传给函数作参数
 kwargs = {"a": 1, "b": 2, "c": 3, "d": 4}
-myfunc(**kwargs) # 1 2 3 4
+myfunc(**kwargs) # 等价于 myfunc(a=1, b=2, c=3, d=4)
 
 
 # 练习题：
